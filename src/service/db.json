@@ -1,0 +1,20 @@
+{
+  "commands": [
+    {
+      "command": "ls",
+      "answer": "text.txt"
+    },
+    {
+      "command": "pwd",
+      "answer": "c:user"
+    },
+    {
+      "command": "help",
+      "answer": "help\npwd\nls"
+    },
+    {
+      "command": "clear",
+      "answer": "clear"
+    }
+  ]
+}
