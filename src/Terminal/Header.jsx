@@ -14,10 +14,10 @@ export const Header = () => {
           <FontAwesomeIcon icon={faTimesCircle} color="#D75224" />
         </a>
         <a href="#">
-          <FontAwesomeIcon icon={faMinusCircle} />
+          <FontAwesomeIcon icon={faMinusCircle} color="#555555" />
         </a>
         <a href="#">
-          <FontAwesomeIcon icon={faPlusCircle} />
+          <FontAwesomeIcon icon={faPlusCircle} color="#555555" />
         </a>
       </div>
       <div className="title">user@host:/$</div>

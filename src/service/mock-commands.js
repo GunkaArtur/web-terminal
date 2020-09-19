@@ -1,38 +1,33 @@
 export default class MockCommands {
-  _commands = [
-    {
-      command: "ls",
-      answer: "text.txt",
-    },
-    {
-      command: "pwd",
-      answer: "c:user",
-    },
-    {
-      command: "help",
-      answer: "help\npwd\nls",
-    },
-    {
-      command: "clear",
-      answer: "clear",
-    },
-  ];
+  _apiBase = "https://my-json-server.typicode.com/gunkaartur/web-terminal";
 
-  help = () => {
-    return this._commands.filter((item) => item.command === "help");
-  };
-  ls = () => {
-    return this._commands.filter((item) => item.command === "ls");
-  };
-  pwd = () => {
-    return this._commands.filter((item) => item.command === "pwd");
-  };
-  clear = () => {
-    return "clear";
+  getResourse = async (url) => {
+    const res = await fetch(`${this._apiBase}${url}`);
+    if (!res.ok) {
+      throw new Error(`Could not fetch ${url} , received ${res.status}`);
+    }
+    return await res.json();
   };
 
-  getCommands = () => {
-    const comands = this._commands.map((item) => item.command);
-    return comands;
+  help = async () => {
+    const res = await this.getResourse(`/help`);
+    return res;
+  };
+  ls = async () => {
+    const res = await this.getResourse(`/ls`);
+    return res;
+  };
+  pwd = async () => {
+    const res = await this.getResourse(`/pwd`);
+    return res;
+  };
+  clear = async () => {
+    const res = await this.getResourse(`/clear`);
+    return res;
+  };
+
+  getApiComands = async () => {
+    const res = await this.getResourse(`/commands/`);
+    return res;
   };
 }

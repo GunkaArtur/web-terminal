@@ -3,11 +3,7 @@ import "./App.css";
 import { Terminal } from "./Terminal/Terminal";
 
 function App() {
-  return (
-    <div>
-      <Terminal />
-    </div>
-  );
+  return <Terminal />;
 }
 
 export default App;

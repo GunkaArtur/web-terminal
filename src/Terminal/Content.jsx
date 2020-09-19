@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MockCommands from "../service/mock-commands";
 
 export const Content = () => {
+  const [commandList, setCommandList] = useState([]);
   const [history, setHistory] = useState([]);
   const [comands, setComands] = useState([]);
   const [currentComand, setCurrentComand] = useState("");
@@ -9,21 +10,44 @@ export const Content = () => {
 
   const mockCom = new MockCommands();
 
-  const avaibleCommands = mockCom.getCommands();
+  async function getAllComands() {
+    const list = await mockCom.getApiComands();
+    return list;
+  }
+
+  async function getValue(command) {
+    const value = await mockCom[command]();
+    return value;
+  }
+
+  useEffect(() => {
+    async function getData() {
+      const list = await getAllComands();
+      setCommandList(list);
+    }
+    getData();
+  }, [getAllComands]);
 
   const refInput = React.createRef();
 
-  const handleKeyDown = ({ key, target }) => {
-    console.log("key", key);
+  const handleKeyDown = async ({ key, target }) => {
     switch (key) {
       case "Enter": {
-        const answer = avaibleCommands.includes(currentComand)
-          ? mockCom[currentComand]()
-          : [{ answer: "Comand not found!" }];
-        setHistory([...history, target.value]);
-        if (target.value) setComands([...comands, target.value]);
+        let answer = [];
+        if (commandList.includes(currentComand)) {
+          answer = await getValue(currentComand);
+        } else {
+          answer = { answer: "Comand not found!" };
+        }
+        if (target.value) {
+          setComands([...comands, target.value]);
+        }
+        if (answer.answer === "clear") {
+          setHistory([]);
+        } else {
+          setHistory([...history, currentComand, answer.answer]);
+        }
         setCurrentComand("");
-        setHistory([...history, currentComand, answer[0].answer]);
         setPrevComand(comands.length + 1);
         return;
       }
@@ -58,8 +82,8 @@ export const Content = () => {
   return (
     <div className="terminal--content" onClick={handleFocus}>
       <ul className="terminal--history">
-        {history.map((item) => (
-          <li>{item}</li>
+        {history.map((item, index) => (
+          <li key={index}>{item}</li>
         ))}
       </ul>
       <span>user@host:/$ </span>
