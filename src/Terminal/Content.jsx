@@ -16,6 +16,13 @@ export const Content = () => {
   }
 
   async function getValue(command) {
+    const prepareComand = command
+      .trim()
+      .split(" ")
+      .join("_")
+      .split(".")
+      .join("_");
+    console.log(prepareComand);
     const value = await mockCom[command]();
     return value;
   }
