@@ -1,5 +1,5 @@
 {
-  "commands": ["ls", "pwd", "help", "clear"],
+  "commands": ["ls", "pwd", "help", "clear", "cat text.txt"],
   "ls": {
     "command": "ls",
     "answer": "text.txt"
