@@ -1,20 +1,19 @@
 {
-  "commands": {
-    "ls": {
-      "command": "ls",
-      "answer": "text.txt"
-    },
-    "pwd": {
-      "command": "pwd",
-      "answer": "c:user"
-    },
-    "help": {
-      "command": "help",
-      "answer": "help\npwd\nls"
-    },
-    "clear": {
-      "command": "clear",
-      "answer": "clear"
-    }
+  "commands": ["ls", "pwd", "help", "clear"],
+  "ls": {
+    "command": "ls",
+    "answer": "text.txt"
+  },
+  "pwd": {
+    "command": "pwd",
+    "answer": "c:user"
+  },
+  "help": {
+    "command": "help",
+    "answer": "help\npwd\nls"
+  },
+  "clear": {
+    "command": "clear",
+    "answer": "clear"
   }
 }
