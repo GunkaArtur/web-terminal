@@ -15,9 +15,5 @@
   "clear": {
     "command": "clear",
     "answer": "clear"
-  },
-  "cat_text_txt": {
-    "command": "cat text.txt",
-    "answer": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio id consequuntur error culpa reiciendis architecto ex assumenda nostrum animi, doloribus possimus deserunt rerum ipsum quae sequi est! Exercitationem dicta, molestiae dolore id voluptatum distinctio dolorem molestias repellat tenetur culpa placeat et commodi quia animi minus asperiores itaque cumque mollitia inventore eos eaque quos suscipit. Distinctio excepturi incidunt quod, dignissimos suscipit placeat! Voluptatibus id totam, distinctio voluptas quod nesciunt laudantium sapiente eos laborum rerum possimus explicabo magnam quae illum aliquam reiciendis quidem facere! Culpa qui delectus dolorum neque ratione mollitia laudantium reprehenderit saepe voluptas illo, impedit aliquid, eius sed amet iusto"
   }
 }

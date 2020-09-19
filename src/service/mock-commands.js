@@ -25,10 +25,6 @@ export default class MockCommands {
     const res = await this.getResourse(`/clear`);
     return res;
   };
-  cat_text_txt = async () => {
-    const res = await this.getResourse(`/cat_text_txt`);
-    return res;
-  };
 
   getApiComands = async () => {
     const res = await this.getResourse(`/commands/`);
