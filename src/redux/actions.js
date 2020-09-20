@@ -1,14 +1,15 @@
-export const ADD_TO_HISTORY = "ADD_TO_HISTORY";
-export const REMOVE_FROM_HISTORY = "REMOVE_FROM_HISTORY";
-
-export const ADD_CURRENT_COMAND = "ADD_CURRENT_COMAND";
-export const REMOVE_CURRENT_COMAND = "REMOVE_CURRENT_COMAND";
-
-export const ADD_COMAND = "ADD_COMAND";
-
-export const ADD_PREV_COMAND = "ADD_PREV_COMAND";
-
-export const SET_COMMANDS = "SET_COMMANDS";
+import {
+  ADD_TO_HISTORY,
+  REMOVE_FROM_HISTORY,
+  ADD_CURRENT_COMAND,
+  REMOVE_CURRENT_COMAND,
+  ADD_COMAND,
+  ADD_PREV_COMAND,
+  SET_COMMANDS,
+  SET_THEME,
+  SET_FONT,
+  SET_COLOR,
+} from "./types";
 
 export function addToHistory(item) {
   return async (dispatch) => {
@@ -68,5 +69,26 @@ export function setCommands() {
     );
     const json = await response.json();
     dispatch({ type: SET_COMMANDS, payload: json });
+  };
+}
+
+export function setTheme(item) {
+  return {
+    type: SET_THEME,
+    payload: item,
+  };
+}
+
+export function setColor(item) {
+  return {
+    type: SET_COLOR,
+    payload: item,
+  };
+}
+
+export function setFont(item) {
+  return {
+    type: SET_FONT,
+    payload: item,
   };
 }

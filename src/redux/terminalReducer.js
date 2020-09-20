@@ -6,7 +6,7 @@ import {
   ADD_COMAND,
   ADD_PREV_COMAND,
   SET_COMMANDS,
-} from "./actions";
+} from "./types";
 
 const initialState = {
   commandList: [],

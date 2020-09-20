@@ -11,12 +11,12 @@ import {
   setCommands,
 } from "../redux/actions";
 
-const Content = ({ history, comands, currentComand, prevComand }) => {
+const Content = ({ history, comands, currentComand, prevComand, color }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setCommands());
-  }, []);
+  }, [dispatch]);
 
   const refInput = React.createRef();
 
@@ -51,6 +51,8 @@ const Content = ({ history, comands, currentComand, prevComand }) => {
         }
         return;
       }
+      default:
+        return;
     }
   };
 
@@ -73,18 +75,20 @@ const Content = ({ history, comands, currentComand, prevComand }) => {
         onKeyDown={(e) => handleKeyDown(e)}
         value={currentComand}
         ref={refInput}
+        style={{ color: color }}
         onChange={(e) => dispatch(addCurrentComand(e.target.value))}
       />
     </div>
   );
 };
 
-const mapStateToProps = ({ terminal }) => {
+const mapStateToProps = ({ terminal, app }) => {
   return {
     history: terminal.history,
     comands: terminal.comands,
     currentComand: terminal.currentComand,
     prevComand: terminal.prevComand,
+    color: app.color,
   };
 };
 

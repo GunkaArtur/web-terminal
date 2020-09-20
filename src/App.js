@@ -1,9 +1,15 @@
 import React from "react";
 import "./App.css";
 import { Terminal } from "./Terminal/Terminal";
+import { Menu } from "./menu";
 
 function App() {
-  return <Terminal />;
+  return (
+    <div className="container">
+      <Menu />
+      <Terminal />
+    </div>
+  );
 }
 
 export default App;
