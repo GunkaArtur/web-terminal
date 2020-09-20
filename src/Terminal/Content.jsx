@@ -1,63 +1,43 @@
-import React, { useEffect, useState } from "react";
-import MockCommands from "../service/mock-commands";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
+import {
+  addToHistory,
+  clearHistory,
+  addCurrentComand,
+  removeCurrentComand,
+  addComand,
+  addPrevComand,
+  setCommands,
+} from "../redux/actions";
 
-export const Content = () => {
-  const [commandList, setCommandList] = useState([]);
-  const [history, setHistory] = useState([]);
-  const [comands, setComands] = useState([]);
-  const [currentComand, setCurrentComand] = useState("");
-  const [prevComand, setPrevComand] = useState(0);
-
-  const mockCom = new MockCommands();
-
-  async function getAllComands() {
-    const list = await mockCom.getApiComands();
-    return list;
-  }
-
-  async function getValue(command) {
-    const value = await mockCom[command]();
-    return value;
-  }
+const Content = ({ history, comands, currentComand, prevComand }) => {
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    async function getData() {
-      const list = await getAllComands();
-      setCommandList(list);
-    }
-    getData();
-  }, [getAllComands]);
+    dispatch(setCommands());
+  }, []);
 
   const refInput = React.createRef();
 
   const handleKeyDown = async ({ key, target }) => {
     switch (key) {
       case "Enter": {
-        let answer = [];
-        if (commandList.includes(currentComand)) {
-          answer = await getValue(currentComand);
-        } else {
-          answer = { answer: "Comand not found!" };
-        }
-        if (target.value) {
-          setComands([...comands, target.value]);
-        }
-        if (answer.answer === "clear") {
-          setHistory([]);
-        } else {
-          setHistory([...history, currentComand, answer.answer]);
-        }
-        setCurrentComand("");
-        setPrevComand(comands.length + 1);
+        target.value && dispatch(addComand(target.value));
+
+        target.value === "clear"
+          ? dispatch(clearHistory())
+          : dispatch(addToHistory(currentComand));
+
+        dispatch(removeCurrentComand());
+        dispatch(addPrevComand(comands.length + 1));
         return;
       }
       case "ArrowUp": {
         if (prevComand === 0) return;
         else {
-          setCurrentComand(comands[prevComand - 1]);
-          if (prevComand !== 0) {
-            setPrevComand(prevComand - 1);
-          }
+          dispatch(addCurrentComand(comands[prevComand - 1]));
+          prevComand !== 0 && dispatch(addPrevComand(prevComand - 1));
         }
         return;
       }
@@ -65,10 +45,9 @@ export const Content = () => {
         if (prevComand === comands.length || prevComand === comands.length - 1)
           return;
         else {
-          setCurrentComand(comands[prevComand + 1]);
-          if (prevComand < comands.length) {
-            setPrevComand(prevComand + 1);
-          }
+          dispatch(addCurrentComand(comands[prevComand + 1]));
+          prevComand < comands.length &&
+            dispatch(addPrevComand(prevComand + 1));
         }
         return;
       }
@@ -94,8 +73,19 @@ export const Content = () => {
         onKeyDown={(e) => handleKeyDown(e)}
         value={currentComand}
         ref={refInput}
-        onChange={(e) => setCurrentComand(e.target.value)}
+        onChange={(e) => dispatch(addCurrentComand(e.target.value))}
       />
     </div>
   );
 };
+
+const mapStateToProps = ({ terminal }) => {
+  return {
+    history: terminal.history,
+    comands: terminal.comands,
+    currentComand: terminal.currentComand,
+    prevComand: terminal.prevComand,
+  };
+};
+
+export default connect(mapStateToProps, null)(Content);
