@@ -13,9 +13,10 @@ export const Terminal = () => {
   useEffect(() => {
     const app = JSON.parse(localStorage.getItem("app"));
 
-    app.color && dispatch(setColor(app.color));
-    app.theme && dispatch(setTheme(app.theme));
-    app.font && dispatch(setFont(app.font));
+    debugger;
+    app && dispatch(setColor(app.color));
+    app && dispatch(setTheme(app.theme));
+    app && dispatch(setFont(app.font));
   }, []);
 
   useEffect(() => {
