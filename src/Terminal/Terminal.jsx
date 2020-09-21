@@ -13,9 +13,9 @@ export const Terminal = () => {
   useEffect(() => {
     const app = JSON.parse(localStorage.getItem("app"));
 
-    color && dispatch(setColor(app.color));
-    theme && dispatch(setTheme(app.theme));
-    font && dispatch(setFont(app.font));
+    app.color && dispatch(setColor(app.color));
+    app.theme && dispatch(setTheme(app.theme));
+    app.font && dispatch(setFont(app.font));
   }, []);
 
   useEffect(() => {
