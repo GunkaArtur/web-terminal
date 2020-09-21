@@ -17,4 +17,4 @@ https://gunkaartur.github.io/web-terminal/
 
 ## How to use
 
-![](https://i.imgur.com/ZHap90A.gifv)
+![](https://i.imgur.com/ZHap90A.gif)
