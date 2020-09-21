@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "./App.scss";
 import { Terminal } from "./Terminal/Terminal";
 import { Menu } from "./menu";
 

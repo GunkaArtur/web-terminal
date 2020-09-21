@@ -5,31 +5,22 @@ import { useSelector, useDispatch } from "react-redux";
 import { setColor, setFont, setTheme } from "../redux/actions";
 
 export const Terminal = () => {
-  const font = useSelector((state) => state.app.font)
-    .trim()
-    .split(" ")
-    .join("-");
-
-  const color = useSelector((state) => state.app.color);
-  const theme = useSelector((state) => state.app.theme);
+  const app = useSelector((state) => state.app);
+  const { font, color, theme } = app;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const theme = localStorage.getItem("theme");
-    const color = localStorage.getItem("color");
-    const font = localStorage.getItem("font");
+    const app = JSON.parse(localStorage.getItem("app"));
 
-    color && dispatch(setColor(color));
-    theme && dispatch(setTheme(theme));
-    font && dispatch(setFont(font));
+    color && dispatch(setColor(app.color));
+    theme && dispatch(setTheme(app.theme));
+    font && dispatch(setFont(app.font));
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("theme", theme);
-    localStorage.setItem("color", color);
-    localStorage.setItem("font", font);
-  }, [font, theme, color]);
+    localStorage.setItem("app", JSON.stringify(app));
+  }, [app]);
 
   return (
     <div
