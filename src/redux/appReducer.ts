@@ -1,12 +1,19 @@
 import { SET_COLOR, SET_THEME, SET_FONT } from "./types";
+import {SetColor, SetFont, SetTheme} from "./actions"
 
-const initialState = {
+type InitialState = {
+  theme: string,
+  font: string,
+  color: string
+}
+
+const initialState:InitialState = {
   theme: "ubuntu",
   font: "courier",
   color: "#aaaaaa",
 };
 
-export const appReducer = (state = initialState, action) => {
+export const appReducer = (state:InitialState = initialState, action: SetFont | SetTheme | SetColor) => {
   switch (action.type) {
     case SET_COLOR: {
       return { ...state, color: action.payload };

@@ -5,18 +5,41 @@ import {
   REMOVE_CURRENT_COMAND,
   ADD_COMAND,
   ADD_PREV_COMAND,
-  SET_COMMANDS,
+  SET_COMMANDS
 } from "./types";
+import {
+  AddToHistory,
+  SetCommands,
+  ClearHistory,
+  AddCurrentComand,
+  RemoveCurrentComand,
+  AddComand,
+  AddPrevComand
+} from "./actions";
+
+type InitialState = typeof initialState;
 
 const initialState = {
   commandList: [],
   history: [],
   comands: [],
   currentComand: "",
-  prevComand: 0,
+  prevComand: 0
 };
 
-export function terminalReducer(state = initialState, action) {
+type Actions =
+  | AddToHistory
+  | SetCommands
+  | ClearHistory
+  | AddCurrentComand
+  | RemoveCurrentComand
+  | AddComand
+  | AddPrevComand;
+
+export function terminalReducer(
+  state: InitialState = initialState,
+  action: Actions
+) {
   switch (action.type) {
     case ADD_TO_HISTORY: {
       return { ...state, history: [...state.history, action.payload] };

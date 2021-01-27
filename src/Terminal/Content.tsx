@@ -8,24 +8,43 @@ import {
   removeCurrentComand,
   addComand,
   addPrevComand,
-  setCommands,
+  setCommands
 } from "../redux/actions";
+import { State } from "../types/state";
 
-const Content = ({ history, comands, currentComand, prevComand, color }) => {
+type Props = {
+  history: Array<string>;
+  comands: Array<string>;
+  currentComand: string;
+  prevComand: number;
+  color: string;
+};
+
+const Content: React.FC<Props | undefined> = ({
+  history,
+  comands,
+  currentComand,
+  prevComand,
+  color
+}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setCommands());
   }, [dispatch]);
 
-  const refInput = React.createRef();
+  const refInput = React.createRef<HTMLInputElement>();
 
-  const handleKeyDown = async ({ key, target }) => {
+  const handleKeyDown = async ({
+    key,
+    target
+  }: React.KeyboardEvent<HTMLInputElement>) => {
     switch (key) {
       case "Enter": {
-        target.value && dispatch(addComand(target.value));
+        (target as HTMLInputElement).value &&
+          dispatch(addComand((target as HTMLInputElement).value));
 
-        target.value === "clear"
+        (target as HTMLInputElement).value === "clear"
           ? dispatch(clearHistory())
           : dispatch(addToHistory(currentComand));
 
@@ -57,7 +76,7 @@ const Content = ({ history, comands, currentComand, prevComand, color }) => {
   };
 
   const handleFocus = () => {
-    refInput.current.focus();
+    refInput?.current?.focus();
   };
 
   return (
@@ -72,23 +91,25 @@ const Content = ({ history, comands, currentComand, prevComand, color }) => {
       <input
         className="terminal--input"
         type="text"
-        onKeyDown={(e) => handleKeyDown(e)}
+        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+          handleKeyDown(e)
+        }
         value={currentComand}
         ref={refInput}
         style={{ color: color }}
-        onChange={(e) => dispatch(addCurrentComand(e.target.value))}
+        onChange={e => dispatch(addCurrentComand(e.target.value))}
       />
     </div>
   );
 };
 
-const mapStateToProps = ({ terminal, app }) => {
+const mapStateToProps = ({ terminal, app }: State) => {
   return {
     history: terminal.history,
     comands: terminal.comands,
     currentComand: terminal.currentComand,
     prevComand: terminal.prevComand,
-    color: app.color,
+    color: app.color
   };
 };
 

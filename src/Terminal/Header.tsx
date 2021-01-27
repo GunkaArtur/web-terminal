@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ReactElement} from "react";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,9 +7,10 @@ import {
   faPlusCircle,
   faCircle,
 } from "@fortawesome/free-solid-svg-icons";
+import {State} from "../types/state"
 
-export const Header = () => {
-  const theme = useSelector((state) => state.app.theme);
+export const Header = ():ReactElement => {
+  const theme = useSelector((state:State) => state.app.theme);
 
   return (
     <div className="terminal--header">
