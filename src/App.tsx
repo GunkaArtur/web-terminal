@@ -1,9 +1,9 @@
-import React from "react";
-import "./App.scss";
+import React, { ReactElement } from "react";
 import { Terminal } from "./Terminal/Terminal";
 import { Menu } from "./menu";
+import "./App.scss";
 
-function App() {
+function App(): ReactElement {
   return (
     <div className="container">
       <Menu />

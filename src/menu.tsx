@@ -1,12 +1,13 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setTheme, setColor, setFont } from "./redux/actions";
+import { State } from "./types/state";
 
-export const Menu = () => {
+export const Menu = (): ReactElement => {
   const dispatch = useDispatch();
-  const color = useSelector((state) => state.app.color);
-  const theme = useSelector((state) => state.app.theme);
-  const font = useSelector((state) => state.app.font)
+  const color = useSelector((state: State) => state.app.color);
+  const theme = useSelector((state: State) => state.app.theme);
+  const font = useSelector((state: State) => state.app.font)
     .trim()
     .split(" ")
     .join("-");
@@ -16,7 +17,7 @@ export const Menu = () => {
       <label htmlFor="theme">Choose a theme:</label>
 
       <select
-        onChange={(e) => dispatch(setTheme(e.target.value))}
+        onChange={e => dispatch(setTheme(e.target.value))}
         name="theme"
         id="theme"
         value={theme}
@@ -28,7 +29,7 @@ export const Menu = () => {
       <label htmlFor="font">Choose font:</label>
 
       <select
-        onChange={(e) => dispatch(setFont(e.target.value))}
+        onChange={e => dispatch(setFont(e.target.value))}
         name="font"
         id="font"
         value={font}
@@ -41,7 +42,7 @@ export const Menu = () => {
       <input
         value={color}
         name="color"
-        onChange={(e) => dispatch(setColor(e.target.value))}
+        onChange={e => dispatch(setColor(e.target.value))}
         type="color"
       />
     </div>
