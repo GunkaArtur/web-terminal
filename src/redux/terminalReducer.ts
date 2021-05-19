@@ -1,20 +1,6 @@
 import {
-  ADD_TO_HISTORY,
-  REMOVE_FROM_HISTORY,
-  ADD_CURRENT_COMAND,
-  REMOVE_CURRENT_COMAND,
-  ADD_COMAND,
-  ADD_PREV_COMAND,
-  SET_COMMANDS
-} from "./types";
-import {
-  AddToHistory,
-  SetCommands,
-  ClearHistory,
-  AddCurrentComand,
-  RemoveCurrentComand,
-  AddComand,
-  AddPrevComand
+  ActionTypes,
+  TerminalActions as Actions
 } from "./actions";
 
 type InitialState = typeof initialState;
@@ -27,45 +13,36 @@ const initialState = {
   prevComand: 0
 };
 
-type Actions =
-  | AddToHistory
-  | SetCommands
-  | ClearHistory
-  | AddCurrentComand
-  | RemoveCurrentComand
-  | AddComand
-  | AddPrevComand;
-
 export function terminalReducer(
   state: InitialState = initialState,
   action: Actions
 ) {
   switch (action.type) {
-    case ADD_TO_HISTORY: {
+    case ActionTypes.AddToHistory: {
       return { ...state, history: [...state.history, action.payload] };
     }
 
-    case REMOVE_FROM_HISTORY: {
+    case ActionTypes.ClearHistory: {
       return { ...state, history: [] };
     }
 
-    case ADD_CURRENT_COMAND: {
+    case ActionTypes.AddCurrentComand: {
       return { ...state, currentComand: action.payload };
     }
 
-    case REMOVE_CURRENT_COMAND: {
+    case ActionTypes.RemoveCurrentComand: {
       return { ...state, currentComand: "" };
     }
 
-    case ADD_COMAND: {
+    case ActionTypes.AddComand: {
       return { ...state, comands: [...state.comands, action.payload] };
     }
 
-    case ADD_PREV_COMAND: {
+    case ActionTypes.AddPrevComand: {
       return { ...state, prevComand: action.payload };
     }
 
-    case SET_COMMANDS: {
+    case ActionTypes.SetCommands: {
       return { ...state, commandList: action.payload };
     }
 

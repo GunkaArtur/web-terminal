@@ -15,7 +15,6 @@ export const Terminal = (): ReactElement => {
     // @ts-ignore
     const app = JSON.parse(localStorage.getItem("app"));
 
-    debugger;
     app && dispatch(setColor(app.color));
     app && dispatch(setTheme(app.theme));
     app && dispatch(setFont(app.font));

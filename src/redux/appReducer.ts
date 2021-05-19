@@ -1,5 +1,4 @@
-import { SET_COLOR, SET_THEME, SET_FONT } from "./types";
-import {SetColor, SetFont, SetTheme} from "./actions"
+import {ActionTypes, AppActions as Actions} from "./actions"
 
 type InitialState = {
   theme: string,
@@ -13,15 +12,15 @@ const initialState:InitialState = {
   color: "#aaaaaa",
 };
 
-export const appReducer = (state:InitialState = initialState, action: SetFont | SetTheme | SetColor) => {
+export const appReducer = (state:InitialState = initialState, action: Actions) => {
   switch (action.type) {
-    case SET_COLOR: {
+    case ActionTypes.SetColor: {
       return { ...state, color: action.payload };
     }
-    case SET_THEME: {
+    case ActionTypes.SetTheme: {
       return { ...state, theme: action.payload };
     }
-    case SET_FONT: {
+    case ActionTypes.SetFont: {
       return { ...state, font: action.payload };
     }
     default:
