@@ -1,15 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { connect } from "react-redux";
-import {
-  addToHistory,
-  clearHistory,
-  addCurrentComand,
-  removeCurrentComand,
-  addComand,
-  addPrevComand,
-  setCommands
-} from "../redux/actions";
+import * as Actions from "../redux/actions";
 import { State } from "../types/state";
 
 type Props = {
@@ -30,7 +22,7 @@ const Content: React.FC<Props | undefined> = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setCommands());
+    dispatch(Actions.setCommands());
   }, [dispatch]);
 
   const refInput = React.createRef<HTMLInputElement>();
@@ -42,21 +34,21 @@ const Content: React.FC<Props | undefined> = ({
     switch (key) {
       case "Enter": {
         (target as HTMLInputElement).value &&
-          dispatch(addComand((target as HTMLInputElement).value));
+          dispatch(Actions.addComand((target as HTMLInputElement).value));
 
         (target as HTMLInputElement).value === "clear"
-          ? dispatch(clearHistory())
-          : dispatch(addToHistory(currentComand));
+          ? dispatch(Actions.clearHistory())
+          : dispatch(Actions.addToHistory(currentComand));
 
-        dispatch(removeCurrentComand());
-        dispatch(addPrevComand(comands.length + 1));
+        dispatch(Actions.removeCurrentComand());
+        dispatch(Actions.addPrevComand(comands.length + 1));
         return;
       }
       case "ArrowUp": {
         if (prevComand === 0) return;
         else {
-          dispatch(addCurrentComand(comands[prevComand - 1]));
-          prevComand !== 0 && dispatch(addPrevComand(prevComand - 1));
+          dispatch(Actions.addCurrentComand(comands[prevComand - 1]));
+          prevComand !== 0 && dispatch(Actions.addPrevComand(prevComand - 1));
         }
         return;
       }
@@ -64,9 +56,9 @@ const Content: React.FC<Props | undefined> = ({
         if (prevComand === comands.length || prevComand === comands.length - 1)
           return;
         else {
-          dispatch(addCurrentComand(comands[prevComand + 1]));
+          dispatch(Actions.addCurrentComand(comands[prevComand + 1]));
           prevComand < comands.length &&
-            dispatch(addPrevComand(prevComand + 1));
+            dispatch(Actions.addPrevComand(prevComand + 1));
         }
         return;
       }
@@ -97,7 +89,7 @@ const Content: React.FC<Props | undefined> = ({
         value={currentComand}
         ref={refInput}
         style={{ color: color }}
-        onChange={e => dispatch(addCurrentComand(e.target.value))}
+        onChange={e => dispatch(Actions.addCurrentComand(e.target.value))}
       />
     </div>
   );

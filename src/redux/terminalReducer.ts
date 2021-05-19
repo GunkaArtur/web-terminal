@@ -1,7 +1,4 @@
-import {
-  ActionTypes,
-  TerminalActions as Actions
-} from "./actions";
+import { ActionTypes, TerminalActions as Actions } from "./actions";
 
 type InitialState = typeof initialState;
 

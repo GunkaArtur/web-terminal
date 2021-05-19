@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect } from "react";
 import { Header } from "./Header";
 import Content from "./Content";
 import { useSelector, useDispatch } from "react-redux";
-import { setColor, setFont, setTheme } from "../redux/actions";
+import * as Actions from "../redux/actions";
 import { State } from "../types/state";
 
 export const Terminal = (): ReactElement => {
@@ -15,9 +15,11 @@ export const Terminal = (): ReactElement => {
     // @ts-ignore
     const app = JSON.parse(localStorage.getItem("app"));
 
-    app && dispatch(setColor(app.color));
-    app && dispatch(setTheme(app.theme));
-    app && dispatch(setFont(app.font));
+    if (app) {
+      dispatch(Actions.setColor(app.color));
+      dispatch(Actions.setTheme(app.theme));
+      dispatch(Actions.setFont(app.font));
+    }
   }, [dispatch]);
 
   useEffect(() => {

@@ -2,16 +2,16 @@ import { Dispatch } from "redux";
 
 // region ActionTypes
 export enum ActionTypes {
-  AddToHistory="TERMINAL/ADD_TO_HISTORY",
-  ClearHistory="TERMINAL/REMOVE_FROM_HISTORY",
-  AddCurrentComand= "TERMINAL/ADD_CURRENT_COMAND",
-  RemoveCurrentComand="TERMINAL/REMOVE_CURRENT_COMAND",
-  AddComand="TERMINAL/ADD_COMAND",
-  AddPrevComand="TERMINAL/ADD_PREV_COMAND",
-  SetCommands="TERMINAL/SET_COMMANDS",
-  SetTheme="APP/SET_THEME",
-  SetColor="APP/SET_COLOR",
-  SetFont="APP/SET_FONT"
+  AddToHistory = "TERMINAL/ADD_TO_HISTORY",
+  ClearHistory = "TERMINAL/REMOVE_FROM_HISTORY",
+  AddCurrentComand = "TERMINAL/ADD_CURRENT_COMAND",
+  RemoveCurrentComand = "TERMINAL/REMOVE_CURRENT_COMAND",
+  AddComand = "TERMINAL/ADD_COMAND",
+  AddPrevComand = "TERMINAL/ADD_PREV_COMAND",
+  SetCommands = "TERMINAL/SET_COMMANDS",
+  SetTheme = "APP/SET_THEME",
+  SetColor = "APP/SET_COLOR",
+  SetFont = "APP/SET_FONT"
 }
 // endregion
 
@@ -25,7 +25,7 @@ export function addToHistory(item: string) {
   return async (dispatch: Dispatch<AddToHistory>) => {
     try {
       const response = await fetch(
-          `https://my-json-server.typicode.com/gunkaartur/web-terminal/${item}`
+        `https://my-json-server.typicode.com/gunkaartur/web-terminal/${item}`
       );
       if (!response.ok) {
         dispatch({ type: ActionTypes.AddToHistory, payload: item });
@@ -59,7 +59,7 @@ export function clearHistory() {
 
 // region AddCurrentComand
 export type AddCurrentComand = {
-  type: ActionTypes.AddCurrentComand
+  type: ActionTypes.AddCurrentComand;
   payload: string;
 };
 
@@ -116,7 +116,7 @@ export type SetCommands = {
 export function setCommands() {
   return async (dispatch: Dispatch<SetCommands>) => {
     const response = await fetch(
-        "https://my-json-server.typicode.com/gunkaartur/web-terminal/commands"
+      "https://my-json-server.typicode.com/gunkaartur/web-terminal/commands"
     );
     const json = await response.json();
     dispatch({ type: ActionTypes.SetCommands, payload: json });
@@ -166,7 +166,14 @@ export function setFont(item: string): SetFont {
 // endregion
 
 // region Actions
-export type TerminalActions =  AddToHistory | ClearHistory | AddCurrentComand | RemoveCurrentComand | AddComand | AddPrevComand | SetCommands
+export type TerminalActions =
+  | AddToHistory
+  | ClearHistory
+  | AddCurrentComand
+  | RemoveCurrentComand
+  | AddComand
+  | AddPrevComand
+  | SetCommands;
 
-export type AppActions = SetColor | SetFont | SetTheme
+export type AppActions = SetColor | SetFont | SetTheme;
 // endregion

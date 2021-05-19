@@ -4,5 +4,5 @@ import { appReducer } from "./appReducer";
 
 export const Reducer = combineReducers({
   terminal: terminalReducer,
-  app: appReducer,
+  app: appReducer
 });

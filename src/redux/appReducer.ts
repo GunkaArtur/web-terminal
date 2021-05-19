@@ -1,18 +1,21 @@
-import {ActionTypes, AppActions as Actions} from "./actions"
+import { ActionTypes, AppActions as Actions } from "./actions";
 
 type InitialState = {
-  theme: string,
-  font: string,
-  color: string
-}
-
-const initialState:InitialState = {
-  theme: "ubuntu",
-  font: "courier",
-  color: "#aaaaaa",
+  theme: string;
+  font: string;
+  color: string;
 };
 
-export const appReducer = (state:InitialState = initialState, action: Actions) => {
+const initialState: InitialState = {
+  theme: "ubuntu",
+  font: "courier",
+  color: "#aaaaaa"
+};
+
+export const appReducer = (
+  state: InitialState = initialState,
+  action: Actions
+) => {
   switch (action.type) {
     case ActionTypes.SetColor: {
       return { ...state, color: action.payload };
