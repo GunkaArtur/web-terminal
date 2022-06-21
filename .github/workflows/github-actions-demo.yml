@@ -4,19 +4,14 @@ jobs:
   init:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+  - name: Checkout
       uses: actions/checkout@v3
+
       - name: Setup node
-      uses: actions/setup-node@v3
-      with:
-        node-version: 12.18.x
-      - name: install modiles
-      run: npm install
-      - name: build project
-      run: npm run build
-      - name: eslint check
-      run: npm run lint
-      - name: ts check
-      run: npm run tsc
-      - name: prettier check
-      run: npm run prettier:check
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.13.x
+          cache: npm
+
+      - name: Install
+        run: npm ci
