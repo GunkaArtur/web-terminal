@@ -1,0 +1,11 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "no-unused-vars": "warn",
+    "no-console": "warn",
+    "quotes": ["error", "double"],
+    "prefer-const": "error",
+    "max-len": ["error", {"code":  120}],
+    "semi": ["warn", "always"]
+  }
+}

@@ -1,16 +1,16 @@
-import React, {ReactElement} from "react";
+import React, { ReactElement } from "react";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTimesCircle,
   faMinusCircle,
   faPlusCircle,
-  faCircle,
+  faCircle
 } from "@fortawesome/free-solid-svg-icons";
-import {State} from "../types/state"
+import { State } from "../types/state";
 
-export const Header = ():ReactElement => {
-  const theme = useSelector((state:State) => state.app.theme);
+export const Header = (): ReactElement => {
+  const theme = useSelector((state: State) => state.app.theme);
 
   return (
     <div className="terminal--header">

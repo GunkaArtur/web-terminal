@@ -18,6 +18,7 @@ export const Terminal = (): ReactElement => {
     if (app) {
       dispatch(Actions.setColor(app.color));
       dispatch(Actions.setTheme(app.theme));
+
       dispatch(Actions.setFont(app.font));
     }
   }, [dispatch]);
