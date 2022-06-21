@@ -6,17 +6,17 @@ import { State } from "../types/state";
 
 type Props = {
   history: Array<string>;
-  comands: Array<string>;
-  currentComand: string;
-  prevComand: number;
+  commands: Array<string>;
+  currentCommand: string;
+  prevCommand: number;
   color: string;
 };
 
 const Content: React.FC<Props | undefined> = ({
   history,
-  comands,
-  currentComand,
-  prevComand,
+  commands,
+  currentCommand,
+  prevCommand,
   color
 }) => {
   const dispatch = useDispatch();
@@ -34,31 +34,35 @@ const Content: React.FC<Props | undefined> = ({
     switch (key) {
       case "Enter": {
         (target as HTMLInputElement).value &&
-          dispatch(Actions.addComand((target as HTMLInputElement).value));
+          dispatch(Actions.addCommand((target as HTMLInputElement).value));
 
         (target as HTMLInputElement).value === "clear"
           ? dispatch(Actions.clearHistory())
-          : dispatch(Actions.addToHistory(currentComand));
+          : dispatch(Actions.addToHistory(currentCommand));
 
-        dispatch(Actions.removeCurrentComand());
-        dispatch(Actions.addPrevComand(comands.length + 1));
+        dispatch(Actions.removeCurrentCommand());
+        dispatch(Actions.addPrevCommand(commands.length + 1));
         return;
       }
       case "ArrowUp": {
-        if (prevComand === 0) return;
+        if (prevCommand === 0) return;
         else {
-          dispatch(Actions.addCurrentComand(comands[prevComand - 1]));
-          prevComand !== 0 && dispatch(Actions.addPrevComand(prevComand - 1));
+          dispatch(Actions.addCurrentCommand(commands[prevCommand - 1]));
+          prevCommand !== 0 &&
+            dispatch(Actions.addPrevCommand(prevCommand - 1));
         }
         return;
       }
       case "ArrowDown": {
-        if (prevComand === comands.length || prevComand === comands.length - 1)
+        if (
+          prevCommand === commands.length ||
+          prevCommand === commands.length - 1
+        )
           return;
         else {
-          dispatch(Actions.addCurrentComand(comands[prevComand + 1]));
-          prevComand < comands.length &&
-            dispatch(Actions.addPrevComand(prevComand + 1));
+          dispatch(Actions.addCurrentCommand(commands[prevCommand + 1]));
+          prevCommand < commands.length &&
+            dispatch(Actions.addPrevCommand(prevCommand + 1));
         }
         return;
       }
@@ -86,10 +90,10 @@ const Content: React.FC<Props | undefined> = ({
         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
           handleKeyDown(e)
         }
-        value={currentComand}
+        value={currentCommand}
         ref={refInput}
         style={{ color: color }}
-        onChange={e => dispatch(Actions.addCurrentComand(e.target.value))}
+        onChange={e => dispatch(Actions.addCurrentCommand(e.target.value))}
       />
     </div>
   );
@@ -98,9 +102,9 @@ const Content: React.FC<Props | undefined> = ({
 const mapStateToProps = ({ terminal, app }: State) => {
   return {
     history: terminal.history,
-    comands: terminal.comands,
-    currentComand: terminal.currentComand,
-    prevComand: terminal.prevComand,
+    commands: terminal.commands,
+    currentCommand: terminal.currentCommand,
+    prevCommand: terminal.prevCommand,
     color: app.color
   };
 };

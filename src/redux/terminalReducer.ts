@@ -5,9 +5,9 @@ type InitialState = typeof initialState;
 const initialState = {
   commandList: [],
   history: [],
-  comands: [],
-  currentComand: "",
-  prevComand: 0
+  commands: [],
+  currentCommand: "",
+  prevCommand: 0
 };
 
 export function terminalReducer(
@@ -23,20 +23,20 @@ export function terminalReducer(
       return { ...state, history: [] };
     }
 
-    case ActionTypes.AddCurrentComand: {
-      return { ...state, currentComand: action.payload };
+    case ActionTypes.AddCurrentCommand: {
+      return { ...state, currentCommand: action.payload };
     }
 
-    case ActionTypes.RemoveCurrentComand: {
-      return { ...state, currentComand: "" };
+    case ActionTypes.RemoveCurrentCommand: {
+      return { ...state, currentCommand: "" };
     }
 
-    case ActionTypes.AddComand: {
-      return { ...state, comands: [...state.comands, action.payload] };
+    case ActionTypes.AddCommand: {
+      return { ...state, commands: [...state.commands, action.payload] };
     }
 
-    case ActionTypes.AddPrevComand: {
-      return { ...state, prevComand: action.payload };
+    case ActionTypes.AddPrevCommand: {
+      return { ...state, prevCommand: action.payload };
     }
 
     case ActionTypes.SetCommands: {

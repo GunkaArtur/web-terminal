@@ -4,10 +4,10 @@ import { Dispatch } from "redux";
 export enum ActionTypes {
   AddToHistory = "TERMINAL/ADD_TO_HISTORY",
   ClearHistory = "TERMINAL/REMOVE_FROM_HISTORY",
-  AddCurrentComand = "TERMINAL/ADD_CURRENT_COMAND",
-  RemoveCurrentComand = "TERMINAL/REMOVE_CURRENT_COMAND",
-  AddComand = "TERMINAL/ADD_COMAND",
-  AddPrevComand = "TERMINAL/ADD_PREV_COMAND",
+  AddCurrentCommand = "TERMINAL/ADD_CURRENT_COMMAND",
+  RemoveCurrentCommand = "TERMINAL/REMOVE_CURRENT_COMMAND",
+  AddCommand = "TERMINAL/ADD_COMMAND",
+  AddPrevCommand = "TERMINAL/ADD_PREV_COMMAND",
   SetCommands = "TERMINAL/SET_COMMANDS",
   SetTheme = "APP/SET_THEME",
   SetColor = "APP/SET_COLOR",
@@ -57,52 +57,52 @@ export function clearHistory() {
 }
 // endregion
 
-// region AddCurrentComand
+// region AddCurrentCommand
 export type AddCurrentComand = {
-  type: ActionTypes.AddCurrentComand;
+  type: ActionTypes.AddCurrentCommand;
   payload: string;
 };
 
-export function addCurrentComand(item: string): AddCurrentComand {
+export function addCurrentCommand(item: string): AddCurrentComand {
   return {
-    type: ActionTypes.AddCurrentComand,
+    type: ActionTypes.AddCurrentCommand,
     payload: item
   };
 }
 // endregion
 
-// region RemoveCurrentComand
-export type RemoveCurrentComand = {
-  type: ActionTypes.RemoveCurrentComand;
+// region RemoveCurrentCommand
+export type RemoveCurrentCommand = {
+  type: ActionTypes.RemoveCurrentCommand;
 };
-export function removeCurrentComand(): RemoveCurrentComand {
+export function removeCurrentCommand(): RemoveCurrentCommand {
   return {
-    type: ActionTypes.RemoveCurrentComand
+    type: ActionTypes.RemoveCurrentCommand
   };
 }
 // endregion
 
-// region AddComand
-export type AddComand = {
-  type: ActionTypes.AddComand;
+// region AddCommand
+export type AddCommand = {
+  type: ActionTypes.AddCommand;
   payload: string;
 };
-export function addComand(item: string): AddComand {
+export function addCommand(item: string): AddCommand {
   return {
-    type: ActionTypes.AddComand,
+    type: ActionTypes.AddCommand,
     payload: item
   };
 }
 // endregion
 
-// region AddPrevComand
-export type AddPrevComand = {
-  type: ActionTypes.AddPrevComand;
+// region AddPrevCommand
+export type AddPrevCommand = {
+  type: ActionTypes.AddPrevCommand;
   payload: number;
 };
-export function addPrevComand(item: number): AddPrevComand {
+export function addPrevCommand(item: number): AddPrevCommand {
   return {
-    type: ActionTypes.AddPrevComand,
+    type: ActionTypes.AddPrevCommand,
     payload: item
   };
 }
@@ -170,9 +170,9 @@ export type TerminalActions =
   | AddToHistory
   | ClearHistory
   | AddCurrentComand
-  | RemoveCurrentComand
-  | AddComand
-  | AddPrevComand
+  | RemoveCurrentCommand
+  | AddCommand
+  | AddPrevCommand
   | SetCommands;
 
 export type AppActions = SetColor | SetFont | SetTheme;
